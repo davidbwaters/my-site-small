@@ -10,15 +10,17 @@ template.innerHTML = `
     .c-video-hero {
       display: flex;
       height: 100%;
+      justify-content: center;
       overflow: hidden;
       position: relative;
     }
-    .c-video__inner {
+    .c-video-hero__inner {
       background-color: black;
       background-position-x: center;
       background-position-y: center;
       background-size: cover;
       box-shadow: inset 0 0 1em 1em black;
+      display: flex;
       filter: 
         hue-rotate(110deg) 
         saturate(0.3) 
@@ -29,6 +31,11 @@ template.innerHTML = `
       position: absolute;
       top: 0;
       width: 100%;
+    }
+    .c-video-hero__noise {
+      mix-blend-mode: difference;
+      opacity: .25;
+      position: absolute;
     }
     :host(c-video-hero) ::slotted(video),
     .c-video-hero__video {
@@ -45,12 +52,27 @@ template.innerHTML = `
     .c-video-hero.c-video-hero--blur .c-video-hero__video {
       filter: blur(3px);
     }
+    :host(c-video-hero):host([opaque]) ::slotted(video),
+    .c-video-hero.c-video-hero--opaque 
+    .c-video-hero__video {
+      opacity: 0.5
+    }
+    .c-video-hero__content::slotted(*),
+    .c-video-hero__content {
+      align-items: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
   </style>
 
-  <span class="c-video__inner">
-    <slot name="video" class="c-video__video"></slot>  
+  <span class="c-video-hero__inner">
+    <slot name="video" class="c-video-hero__video">
+    </slot>
+    </slot>
   </span>
-  <slot name="content"></slot>
+  <slot name="content" class="c-video-hero__content">
 `
 
 customElements.define(
@@ -90,7 +112,30 @@ customElements.define(
       if (this.hasAttribute('noise')) {
 
         this.shadowRoot.innerHTML += `
-
+          <svg 
+            class="c-video-hero__noise"
+            height="100%"
+            width="100%"
+          >
+            <filter 
+              id='noise'
+              x='0%' 
+              y='0%' 
+              width='100%' 
+              height='100%'
+            >
+              <feTurbulence 
+                type="fractalNoise" 
+                baseFrequency="0.8"
+                numOctaves="1"
+              />
+            </filter>
+            <rect 
+              filter="url(#noise)"
+              width='100%' 
+              height='100%'
+            />
+          </svg>
         `
 
       }

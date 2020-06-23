@@ -20,5 +20,9 @@ document.body.innerHTML = `
         type="video/webm"
       >
     </video>
+    <span slot="content">
+      <h1>I create digital solutions to promote growth.</h1>
+      <span>David B. Waters</span>
+    </span>
   </c-video-hero>
 `
