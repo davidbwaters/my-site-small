@@ -1,0 +1,35 @@
+/*
+ *  Settings - Global
+ */
+
+
+// Sizing
+
+$global-sizing-base: 1rem;
+
+$global-breakpoints: (
+  sm  : "screen and ( min-width: 768px )",
+  md  : "screen and ( min-width: 1000px )"
+) !default;
+
+
+// Size Fractions
+
+$global-size-fractions: 2, 3, 6;
+
+
+// Namespaces
+
+$global-namespaces: (
+  'components' : '-c',
+  'objects'    : '-o',
+  'utilities'  : '-u'
+) !default;
+
+
+// Separators
+
+$global-separators: (
+  'breakpoint' : '\@',
+  'size'       : '\/'
+) !default;
