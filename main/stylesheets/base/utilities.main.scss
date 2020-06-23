@@ -1,0 +1,22 @@
+/*
+ *  Utilities - Main
+ */
+
+.u-text-xl {
+  font-size: var(--text-xl, 1.728em);
+}
+.u-text-lg {
+  font-size: var(--text-lg, 1.44em);
+}
+.u-text-md {
+  font-size: var(--text-md, 1.2em);
+}
+.u-text-base {
+  font-size: 1em;
+}
+.u-text-sm {
+  font-size: var(--text-sm, 0.833em);
+}
+.u-text-xs {
+  font-size: var(--text-xs, 0.694em);
+}
