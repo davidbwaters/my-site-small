@@ -1,0 +1,136 @@
+/*
+ *  Objects - Grid
+ */
+
+$flexgrid-spacing-sizes: (
+    null: $flexgrid-gutter-width,
+    '--tiny': $global-spacing-unit-tiny,
+    '--small': $global-spacing-unit-small,
+    '--large': $global-spacing-unit-large,
+    '--huge': $global-spacing-unit-huge,
+    '--flush': 0,
+) !default;
+
+// Specify possible alignment values
+
+$flexgrid-alignment-values: (
+    '--top': 'flex-start',
+    '--middle': 'center',
+    '--bottom': 'flex-end',
+    '--baseline': 'baseline',
+    '--stretch': 'stretch',
+) !default;
+
+// Specify possible justify values
+
+$flexgrid-justify-values: (
+    '--left': 'flex-start',
+    '--center': 'center',
+    '--right': 'flex-end',
+    '--between': 'space-between',
+    '--around': 'space-around',
+) !default;
+
+/* The grid
+   ========================================================================== */
+
+.o-grid {
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    padding: 0;
+}
+
+/**
+ * 1. Cells are full-width and stack on top of each other by default.
+ */
+
+.o-grid__cell {
+    flex: 0 1 auto;
+    width: 100%; /* [1] */
+}
+
+
+/* Gutters
+   ========================================================================== */
+
+/**
+ * 1. The map $flexgrid-spacing-sizes contains a `null` key which
+ *    will be our default gutter size.
+ * 2. Add a negative margin on one side only. That way we aren't required to use
+ *    a wrapper with the same amount of spacing, though it's common to do so.
+ * 3. Neutralize the left margin on `o-grid`.
+ */
+
+@each $size-namespace, $size in $flexgrid-spacing-sizes {
+    .o-grid#{$size-namespace} { /* [1] */
+        margin-left: -$size; /* [2] */
+        & > .o-grid__cell {
+            padding-left: $size; /* [3] */
+        }
+    }
+}
+
+
+/* Automatically size cells by distributing them equally
+   ========================================================================== */
+
+.o-grid--auto {
+    & > .o-grid__cell {
+        flex: 1 0 0;
+    }
+}
+
+
+/* Horizontal alignment
+   ========================================================================== */
+
+@each $namespace, $value in $flexgrid-justify-values {
+    .o-grid#{$namespace} {
+        justify-content: #{$value};
+    }
+}
+
+
+/* Pull behavior
+   ========================================================================== */
+
+.o-grid__cell--pull-left {
+    margin-right: auto;
+}
+
+.o-grid__cell--pull-right {
+    margin-left: auto;
+}
+
+
+/* Vertical alignment
+   ========================================================================== */
+
+@each $namespace, $value in $flexgrid-alignment-values {
+    .o-grid#{$namespace} {
+        align-items: #{$value};
+    }
+}
+
+@each $namespace, $value in $flexgrid-alignment-values {
+    .o-grid__cell#{$namespace} {
+        align-self: #{$value};
+    }
+}
+
+
+/* Content distribution
+   ========================================================================== */
+
+.o-grid--reverse {
+    flex-direction: row-reverse;
+}
+
+.o-grid--column {
+    flex-direction: column;
+}
+
+.o-grid--column-reverse {
+    flex-direction: column-reverse;
+}

@@ -1,0 +1,47 @@
+/*
+ *  Utilities - Text Scaling
+ */
+
+$utility-text-scaling-names: $core-size-names !default;
+$utility-text-scaling-prefix: 'text-scaling-' !default;
+
+@mixin utility-text-scaling-generate {
+  
+  $prefix: #{'.' + $utility-text-scaling-prefix};
+  
+  $normal: map-get( $utility-text-scaling-names, 'normal' );
+  $small: map-get( $utility-text-scaling-names, 'small' );
+  $large: map-get( $utility-text-scaling-names, 'large' );
+
+  @for $i from 1 through length( $small ) {
+
+    $suffix: nth( $small, $i );
+    $n: ( length( $small ) - $i + 1 ) * -1;
+
+    #{$prefix + $suffix} {
+      font-size: tool-scaling( 
+        $n, $core-scale-text, $core-size-base-text 
+      );
+    }
+  
+  }
+
+  #{$prefix + $normal} {
+    font-size: $core-size-base-text;
+  }
+
+  @for $i from 1 through length( $large ) {
+
+    $suffix: nth( $large, $i );
+    
+    #{$prefix + $suffix} {
+      font-size: tool-scaling( 
+        $i, $core-scale-text, $core-size-base-text 
+      );
+    }
+  
+  }
+
+}
+
+@include utility-text-scaling-generate;

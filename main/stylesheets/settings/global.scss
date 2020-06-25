@@ -1,0 +1,47 @@
+/*
+ *  Settings - Global
+ */
+
+// Scaling
+$core-scale: 1.2 !default;
+$core-scale-text: $core-scale !default;
+
+// Sizing
+$core-size-base: 1rem !default;
+$core-size-base-text: $core-size-base !default;
+$core-size-ratios: ( 2, 3, 6 ) !default;
+
+// Sizes
+$core-size-names: (
+  'normal': 'medium',
+  'small': (
+    'tiny',
+    'small'
+  ),
+  'large': ( 
+    'large', 
+    'extra-large', 
+    'huge', 
+    'gigantic', 
+    'enormous'
+  )
+) !default;
+
+// Breakpoints
+$core-breakpoints: (
+  'mobile'  : "screen and ( min-width: 768px )",
+  'tablet'  : "screen and ( min-width: 1000px )"
+) !default;
+
+// Namespaces
+$core-namespaces: (
+  'components'  : '-c',
+  'objects'     : '-o',
+  'utilities'   : '-u'
+) !default;
+
+// Separators
+$core-separators: (
+  'breakpoint'  : '\@',
+  'sizing'      : '\/'
+) !default;

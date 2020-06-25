@@ -2,15 +2,14 @@
  *  Components - Background Video
  */
 
-const template = document.createElement('template')
-
-template.innerHTML = `
+const style = `
   <style>
     :host(c-video-hero),
     .c-video-hero {
       display: flex;
       height: 100%;
       justify-content: center;
+      align-items: center;
       overflow: hidden;
       position: relative;
     }
@@ -20,22 +19,12 @@ template.innerHTML = `
       background-position-y: center;
       background-size: cover;
       box-shadow: inset 0 0 1em 1em black;
-      display: flex;
-      filter: 
-        hue-rotate(110deg) 
-        saturate(0.3) 
-        brightness(1.2);
       height: 100%;
       left: 0;
       overflow: hidden;
       position: absolute;
       top: 0;
       width: 100%;
-    }
-    .c-video-hero__noise {
-      mix-blend-mode: difference;
-      opacity: .25;
-      position: absolute;
     }
     :host(c-video-hero) ::slotted(video),
     .c-video-hero__video {
@@ -48,31 +37,38 @@ template.innerHTML = `
       transform: translate(-50%, -50%);
       width: 177.77777778vh;
     }
-    :host(c-video-hero):host([blur]) ::slotted(video),
-    .c-video-hero.c-video-hero--blur .c-video-hero__video {
+    :host(c-video-hero):host([blur]) .c-video-hero__inner,
+    .c-video-hero.c-video-hero--blur  .c-video-hero__inner {
       filter: blur(3px);
     }
-    :host(c-video-hero):host([opaque]) ::slotted(video),
+    :host(c-video-hero):host([opaque]) .c-video-hero__inner,
     .c-video-hero.c-video-hero--opaque 
     .c-video-hero__video {
       opacity: 0.5
     }
     .c-video-hero__content::slotted(*),
     .c-video-hero__content {
-      align-items: center;
       color: white;
-      display: flex;
-      justify-content: center;
+      display: inline-block;
       position: relative;
+      z-index: 2;
+    }
+    .c-video-hero__noise {
+      mix-blend-mode: difference;
+      opacity: .25;
+      position: absolute;
+      z-index: 1;
     }
   </style>
+`
 
+const template = `
+  ${style}
   <span class="c-video-hero__inner">
     <slot name="video" class="c-video-hero__video">
     </slot>
-    </slot>
   </span>
-  <slot name="content" class="c-video-hero__content">
+  <slot class="c-video-hero__content" name="content"></slot>
 `
 
 customElements.define(
@@ -86,8 +82,11 @@ customElements.define(
       super()
       this.attachShadow({ mode: 'open' })
 
+      const templateEl = document.createElement('template')
+      templateEl.innerHTML = template
+
       this.shadowRoot.appendChild(
-        template.content.cloneNode(true)
+        templateEl.content.cloneNode(true)
       )
 
       const video = this.querySelector('video')

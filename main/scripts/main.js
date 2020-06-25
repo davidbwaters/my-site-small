@@ -6,11 +6,11 @@ import '../stylesheets/main.scss'
 import '../videos/growth.mp4'
 import '../videos/growth.webm'
 import './components/video-hero'
-
+import './components/top-bar'
 
 document.body.innerHTML = `
   <c-video-hero blur noise>
-    <video slot="video">
+    <video slot="video" class="u-filter-trippy">
       <source
         src="videos/growth.mp4"
         type="video/mp4"

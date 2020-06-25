@@ -1,0 +1,52 @@
+/*
+ *  Settings - Global
+ */
+
+// Sizing
+$sizing-unit: .5rem !default;
+$sizing-scale: 1.2 !default;
+$sizing-fractions: ( 2, 3, 6 ) !default;
+
+// Spacing
+$spacing-responsive: true !default;
+$spacing-size-names: (
+  'tiny',
+  'small',
+  'medium',
+  'large',
+  'huge'
+);
+
+// Text
+$text-size-root: 16px !default;
+$text-size-scale: $sizing-scale !default;
+
+// Size Names
+$core-size-names: (
+  'large': ( 
+    'large', 
+    'extra-large', 
+    'huge', 
+    'gigantic', 
+    'enormous'
+  )
+) !default;
+
+// Breakpoints
+$core-breakpoints: (
+  'mobile'  : "screen and ( min-width: 768px )",
+  'tablet'  : "screen and ( min-width: 1000px )"
+) !default;
+
+// Namespaces
+$core-namespaces: (
+  'components'  : '-c',
+  'objects'     : '-o',
+  'utilities'   : '-u'
+) !default;
+
+// Separators
+$core-separators: (
+  'breakpoint'  : '\@',
+  'sizing'      : '\/'
+) !default;

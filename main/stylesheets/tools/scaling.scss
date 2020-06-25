@@ -1,0 +1,17 @@
+/*
+ *  Tools - Scaling
+ */
+
+@use 'sass:math';
+
+@function tool-scaling($value, $scale: 1.2, $base: 1rem) {
+  @if $value > 0 {
+    @return $base * math.pow($scale, $value)
+  }
+  @else if $value < 0 {
+    @return $base / math.pow($scale, math.abs($value))
+  }
+  @else if $value == 0 {
+    @return $base
+  }
+}
